@@ -11,4 +11,46 @@ function getPlayerChoice()
     return choice;
 }
 
-console.log(getPlayerChoice());
+function playRound(playerSelection, computerSelection)
+{
+    if(playerSelection === computerSelection)
+    {
+        return 'Draw';
+    }
+    else if(playerSelection === 'Rock')
+    {
+        if(computerSelection === 'Scissors')
+        {
+            return 'You Win! Rock beats Scissors';
+        }
+        else
+        {
+            return 'You Lose! Paper beats Rock';
+        }
+    }
+    else if(playerSelection === 'Paper')
+    {
+        if(computerSelection === 'Rock')
+        {
+            return 'You Win! Paper beats Rock';
+        }
+        else
+        {
+            return 'You Lose! Scissors beats Paper';
+        }
+    }
+    else if(playerSelection === 'Scissors')
+    {
+        if(computerSelection === 'Paper')
+        {
+            return 'You Win! Scissors beats Paper';
+        }
+        else
+        {
+            return 'You Lose! Rock beats Scissors';
+        }
+    }
+
+}
+
+console.log(playRound('Rock', getComputerChoice()));
