@@ -4,12 +4,6 @@ function getComputerChoice()
     return choice[Math.floor(Math.random() * 3)];
 }
 
-function getPlayerChoice()
-{
-    let text = prompt('Enter rock, paper, or scissors: ');
-    let choice = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-    return choice;
-}
 
 function playRound(playerSelection, computerSelection)
 {
@@ -21,44 +15,111 @@ function playRound(playerSelection, computerSelection)
     {
         if(computerSelection === 'Scissors')
         {
-            return 'You Win! Rock beats Scissors';
+            return 'Player';
         }
         else
         {
-            return 'You Lose! Paper beats Rock';
+            return 'Computer';
         }
     }
     else if(playerSelection === 'Paper')
     {
         if(computerSelection === 'Rock')
         {
-            return 'You Win! Paper beats Rock';
+            return 'Player';
         }
         else
         {
-            return 'You Lose! Scissors beats Paper';
+            return 'Computer';
         }
     }
     else if(playerSelection === 'Scissors')
     {
         if(computerSelection === 'Paper')
         {
-            return 'You Win! Scissors beats Paper';
+            return 'Player';
         }
         else
         {
-            return 'You Lose! Rock beats Scissors';
+            return 'Computer';
         }
     }
 
 }
 
-function game()
+let playerScore = 0;
+let comScore = 0;
+
+
+function updateScore(decision)
 {
-    for(let i = 0; i < 5; i++)
+    if(decision === 'Player')
     {
-        console.log(playRound(getPlayerChoice(), getComputerChoice()));
+        playerScore++;
     }
+    else if(decision === 'Computer')
+    {
+        comScore++;
+    }
+   
+    
 }
 
-game();
+const results = document.querySelector('#results');
+
+const result = document.createElement('div');
+result.classList.add('result');
+
+
+function checkResults(player, com)
+{
+    if(playerScore === 5)
+    {
+        result.textContent = 'Player wins';
+    }
+    else if(comScore === 5)
+    {
+        result.textContent = 'Computer Wins';
+    }
+    else
+    {
+        result.textContent = `Player: ${playerScore}  Computer: ${comScore}`;
+    }
+
+    results.appendChild(result);
+
+}
+
+
+
+
+const rbutton = document.querySelector('.rockButton');
+rbutton.addEventListener('click', () => {
+    let cpu = getComputerChoice();
+    let decision = playRound('Rock', cpu);
+    updateScore(decision);
+    checkResults(playerScore, comScore);
+});
+
+const pbutton = document.querySelector('.paperButton');
+pbutton.addEventListener('click', () => {
+    let cpu = getComputerChoice();
+    let decision = playRound('Paper', cpu);
+    updateScore(decision);
+    checkResults(playerScore, comScore);
+});
+
+
+const sbutton = document.querySelector('.scissorsButton');
+sbutton.addEventListener('click', () => {
+    let cpu = getComputerChoice();
+    let decision = playRound('Scissors', cpu);
+    updateScore(decision);
+    checkResults(playerScore, comScore);
+});
+
+
+
+
+
+
